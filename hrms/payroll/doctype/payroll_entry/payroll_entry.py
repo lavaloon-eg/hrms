@@ -872,6 +872,10 @@ class PayrollEntry(Document):
 
 					salary_slip_total -= salary_detail.amount
 
+				for loan in salary_detail.loans:
+					salary_slip_total -= loan.total_payment
+
+
 		if salary_slip_total > 0:
 			self.set_accounting_entries_for_bank_entry(salary_slip_total, "salary")
 
