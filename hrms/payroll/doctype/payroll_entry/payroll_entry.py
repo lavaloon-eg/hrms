@@ -680,6 +680,9 @@ class PayrollEntry(Document):
 
 						salary_slip_total -= sal_detail.amount
 
+				for sal_detail in salary_slip.loans:
+					salary_slip_total -= sal_detail.total_payment
+
 			if salary_slip_total > 0:
 				self.create_journal_entry(salary_slip_total, "salary")
 
