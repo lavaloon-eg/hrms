@@ -872,8 +872,10 @@ class PayrollEntry(Document):
 
 					salary_slip_total -= salary_detail.amount
 
-				for loan in salary_detail.loans:
-					salary_slip_total -= loan.total_payment
+				# Check if the salary slip has loans child table before starting deduct the loan amount
+				if salary_detail.loans:
+					for loan in salary_detail.loans:
+						salary_slip_total -= loan.total_payment
 
 
 		if salary_slip_total > 0:
